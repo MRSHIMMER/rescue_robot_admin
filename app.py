@@ -3,6 +3,7 @@ from flask import Flask
 from flask import request
 from sqlalchemy import true
 from functional.turtlebot_navigation import *
+from functional.command import *
 
 # flask run --host=0.0.0.0    接收外网请求
 
@@ -39,6 +40,13 @@ def navigation():
 def navigation2():
   send_navigation_command2(request.get_json())
   return "navigation2请求跨域成功"
+
+
+@app.route("/api/patrol")
+def patrol():
+  send_patrol_command()
+  print("进入patrol接口")
+  return "巡逻命令发送成功"
 
 
 if __name__ == '__main__':
